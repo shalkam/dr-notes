@@ -1,0 +1,8 @@
+[{"_id":{"$oid":"58dabcdb4ccc46e776d1895c"},"key":"rkTabJgOg","admin":true,"blahblah":true},
+{"_id":{"$oid":"58daebe64ccc46e776d18961"},"key":"BykgnDd3x","manager":true},
+{"_id":{"$oid":"58daec364ccc46e776d18962"},"key":"B1AVnP_2x","manager":true},
+{"_id":{"$oid":"58daec664ccc46e776d18963"},"key":"BJ1_2wOhl","manager":true},
+{"_id":{"$oid":"58daed174ccc46e776d18964"},"key":"SyJ7TvO2g","admin":true},
+{"_id":{"$oid":"58daf0864ccc46e776d18965"},"key":"S1Atluu3e","manager":true,"admin":true},
+{"_id":{"$oid":"58dc1a624ccc46e776d18966"},"key":"B1sDcqY3x","manager":true,"admin":true}
+]

@@ -1,0 +1,28 @@
+html {
+  /*overflow-y: scroll!important;*/
+  overflow-x: hidden;
+}
+body, html{
+  font-family: DroidSansArabic;
+  padding: 0;
+  margin: 0;
+}
+div.rw-selectlist, ul.rw-list {
+  height: auto;
+  margin-bottom: 15px;
+}
+
+label.control-label {
+  text-overflow: unset;
+  white-space: normal;
+}
+
+.padded-more {
+    padding: 10px;
+}
+
+@media print {
+.noPrint {
+    display:none;
+  }
+}

@@ -1,0 +1,15 @@
+mutation insert($data: noteInput!){
+  note {
+    insert(data: $data) {
+      id
+      title
+      content
+      files {
+        name
+        type
+        size
+        path
+      }
+    }
+  }
+}

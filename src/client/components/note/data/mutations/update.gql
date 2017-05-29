@@ -1,0 +1,15 @@
+mutation update($data: noteInput!){
+  note {
+    update(data: $data) {
+      id
+      title
+      content
+      files {
+          name
+          type
+          size
+          path
+        }
+    }
+  }
+}

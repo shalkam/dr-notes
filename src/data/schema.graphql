@@ -1,0 +1,1462 @@
+type allows {
+  resources: [resourcesEnum]
+  permissions: [permissionsEnum]
+}
+
+enum audioGPS {
+  radio
+  cd
+  dvd
+  multiCd
+  aux
+  usb
+  blueTooth
+  GPS
+}
+
+enum body {
+  leather
+  cloth
+  velvet
+  roofOpening
+  panorama
+  sportRims
+  xenon
+  ledFront
+  ledBack
+  fogLights
+  smartParking
+}
+
+# Complex data type of rating (out of ten) and a text comment
+type booleanComment {
+  notChecked: Boolean
+
+  # يوجد او لا يوجد
+  boolean: Boolean
+
+  # التعليق
+  comment: String
+}
+
+# Complex data type of rating (out of ten) and a text comment
+input booleanCommentInput {
+  notChecked: Boolean
+
+  # يوجد او لا يوجد
+  boolean: Boolean
+
+  # التعليق
+  comment: String
+}
+
+type breakPad {
+  notChecked: Boolean
+  change: Boolean
+  percentage: Int
+}
+
+input breakPadInput {
+  notChecked: Boolean
+  change: Boolean
+  percentage: Int
+}
+
+input carePriceInput {
+  from: Int
+  to: Int
+}
+
+type carPrice {
+  from: Int
+  to: Int
+}
+
+# نقاط فحص السيارة
+type check {
+  # نقاط الفحص الخارجية
+  exterior: exterior
+
+  # نقاط الفحص الداخلية
+  interior: interior
+
+  # نقاط فحص الماتور
+  motor: motor
+
+  # نقاط فحص الحالة السفلية للسيارة
+  inferior: inferior
+
+  # نقاط فحص نظام التعليق
+  suspension: suspension
+
+  # فحص الإطارات والمكابح
+  tiresBrakes: tiresBrakes
+}
+
+type checkedCar {
+  _id: ID
+  userId: ID
+
+  # نوع اعلان السيارة
+  carType: String!
+
+  # عنوان الاعلان
+  title: String!
+
+  # الماركة-النوع
+  brand: String
+
+  # الموديل
+  model: String
+
+  # طراز 
+  type: String
+
+  # نمط السيارة
+  pattern: String
+
+  # سنة الصنع
+  year: String
+
+  # قوة حصان
+  hp: String
+
+  # سعة المحرك
+  cc: String
+
+  # الوقود
+  fuel: String
+
+  # ناقل الحركة
+  gearbox: gearboxTypes
+
+  # لون السيارة
+  color: String
+  gallery: [file!]
+  created: String
+  updated: String
+  expiration: String
+  published: String
+  audio: [audioGPS]
+  body: [body]
+  control: [control]
+  saftey: [saftey]
+  windows: [windows]
+  inspectionPlace: String
+  licensePlace: String
+  phone: [String]
+
+  # الكيلومتر
+  kliks: String
+
+  # السعر
+  price: String
+
+  # نقاط فحص السيارة
+  check: check
+}
+
+input checkedCarInput {
+  _id: ID
+  userId: ID
+
+  # عنوان الاعلان
+  title: String!
+
+  # الماركة-النوع
+  brand: String
+
+  # الموديل
+  model: String
+
+  # طراز 
+  type: String
+
+  # نمط السيارة
+  pattern: String
+
+  # سنة الصنع
+  year: String
+
+  # قوة حصان
+  hp: String
+
+  # سعة المحرك
+  cc: String
+
+  # الوقود
+  fuel: String
+
+  # ناقل الحركة
+  gearbox: gearboxTypesInput
+
+  # لون السيارة
+  color: String
+  gallery: [fileInput!]
+  created: String
+  updated: String
+  expiration: String
+  published: String
+  audio: [audioGPS]
+  body: [body]
+  control: [control]
+  saftey: [saftey]
+  windows: [windows]
+
+  # الكيلومتر
+  kliks: String
+
+  # السعر
+  price: String
+  inspectionPlace: String
+  licensePlace: String
+  phone: [String]
+
+  # نقاط فحص السيارة
+  check: checkInput
+}
+
+type checkedCarMutation {
+  remove(id: ID!): checkedCar
+  removeAll: Boolean
+  upsert(data: checkedCarInput!): checkedCar
+}
+
+type checkedCarQuery {
+  find(filter: JSON): [checkedCar]
+  findOne(id: ID!): checkedCar
+}
+
+# نقاط فحص السيارة
+input checkInput {
+  # نقاط الفحص الخارجية
+  exterior: exteriorInput
+
+  # نقاط الفحص الداخلية
+  interior: interiorInput
+
+  # نقاط فحص الماتور
+  motor: motorInput
+
+  # نقاط فحص الحالة السفلية للسيارة
+  inferior: inferiorInput
+
+  # نقاط فحص نظام التعليق
+  suspension: suspensionInput
+
+  # فحص الإطارات والمكابح
+  tiresBrakes: tiresBrakesInput
+}
+
+type config {
+  _id: ID
+  key: String!
+  value: String
+}
+
+input configFilter {
+  _id: ID
+  key: String
+  value: String
+}
+
+input configInput {
+  _id: ID
+  key: String!
+  value: String
+}
+
+type configMutation {
+  remove(id: ID!): config
+  removeAll: Boolean
+  upsert(data: configInput!): config
+}
+
+type configQuery {
+  find(filter: configFilter): [config]
+  findOne(id: ID!): config
+}
+
+enum control {
+  remote
+  ac
+  roofOpening
+  panoramaRoof
+  eMirrors
+  eCloseMirrors
+  eSeats
+  power
+  speedFixer
+}
+
+input exhastInput {
+  type: [exhaustTypesInput]
+  comment: String
+}
+
+type exhaust {
+  type: [exhaustTypes]
+  comment: String
+}
+
+enum exhaustTypes {
+  notChecked
+  clear
+  blue
+  black
+  vapour
+}
+
+enum exhaustTypesInput {
+  notChecked
+  clear
+  blue
+  black
+  vapour
+}
+
+# نقاط الفحص الخارجية
+type exterior {
+  # الإكصدام الأمامي
+  fbumper: ratingComment
+
+  # الإكصدام الخلفي
+  bbumper: ratingComment
+
+  # الكبوت
+  hood: ratingPainting
+
+  # السقف
+  roof: ratingPainting
+
+  # فتحة السقف
+  roofOpening: ratingComment
+
+  # الشنطة
+  trunk: ratingPainting
+
+  # الباب الأمامي يمين
+  frDoor: ratingPainting
+
+  # الباب الأمامي يسار
+  flDoor: ratingPainting
+
+  # الباب الخلفي يمين
+  brDoor: ratingPainting
+
+  # الباب الخلفي يسار
+  blDoor: ratingPainting
+
+  # الرفرف الأمامي يمين
+  frRafraf: ratingPainting
+
+  # الرفرف الأمامي يسار
+  flRafraf: ratingPainting
+
+  # الرفرف الخلفي يمين
+  brRafraf: ratingPainting
+
+  # الرفرف الخلفي يسار
+  blRafraf: ratingPainting
+
+  # المصباح الأمامي يمين
+  frLight: ratingComment
+
+  # المصباح الامامي يسار
+  flLight: ratingComment
+
+  # المصباح الخلفي يمين
+  brLight: ratingComment
+
+  # المصباح الخلفي يسار
+  blLight: ratingComment
+
+  # المرآة اليمين
+  rMirror: ratingComment
+
+  # المرآة اليسار
+  lMirror: ratingComment
+
+  # الجنط الأمامي يمين
+  frWheel: ratingComment
+
+  # الجنط الأمامي يسار
+  flWheel: ratingComment
+
+  # الجنط الخلفي يمين
+  brWheel: ratingComment
+
+  # الجنط الخلفي يسار
+  blWheel: ratingComment
+
+  # القائم الأمامي يمين
+  frPillar: ratingPainting
+
+  # القائم الأمامي يسار
+  flPillar: ratingPainting
+
+  # القائم الوسط يمين
+  mrPillar: ratingPainting
+
+  # القائم الوسط يسار
+  mlPillar: ratingPainting
+
+  # القائم الخلفي يمين
+  brPillar: ratingPainting
+
+  # القائم الخلفي يسار
+  blPillar: ratingPainting
+
+  # حوض الماتور
+  motorSpace: ratingPainting
+
+  # حوض الشنطة
+  trunkSpace: ratingPainting
+}
+
+# نقاط الفحص الخارجية
+input exteriorInput {
+  # الإكصدام الأمامي
+  fbumper: ratingCommentInput
+
+  # الإكصدام الخلفي
+  bbumper: ratingCommentInput
+
+  # الكبوت
+  hood: ratingPaintingInput
+
+  # السقف
+  roof: ratingPaintingInput
+
+  # فتحة السقف
+  roofOpening: ratingCommentInput
+
+  # الشنطة
+  trunk: ratingPaintingInput
+
+  # الباب الأمامي يمين
+  frDoor: ratingPaintingInput
+
+  # الباب الأمامي يسار
+  flDoor: ratingPaintingInput
+
+  # الباب الخلفي يمين
+  brDoor: ratingPaintingInput
+
+  # الباب الخلفي يسار
+  blDoor: ratingPaintingInput
+
+  # الرفرف الأمامي يمين
+  frRafraf: ratingPaintingInput
+
+  # الرفرف الأمامي يسار
+  flRafraf: ratingPaintingInput
+
+  # الرفرف الخلفي يمين
+  brRafraf: ratingPaintingInput
+
+  # الرفرف الخلفي يسار
+  blRafraf: ratingPaintingInput
+
+  # المصباح الأمامي يمين
+  frLight: ratingCommentInput
+
+  # المصباح الامامي يسار
+  flLight: ratingCommentInput
+
+  # المصباح الخلفي يمين
+  brLight: ratingCommentInput
+
+  # المصباح الخلفي يسار
+  blLight: ratingCommentInput
+
+  # المرآة اليمين
+  rMirror: ratingCommentInput
+
+  # المرآة اليسار
+  lMirror: ratingCommentInput
+
+  # الجنط الأمامي يمين
+  frWheel: ratingCommentInput
+
+  # الجنط الأمامي يسار
+  flWheel: ratingCommentInput
+
+  # الجنط الخلفي يمين
+  brWheel: ratingCommentInput
+
+  # الجنط الخلفي يسار
+  blWheel: ratingCommentInput
+
+  # القائم الأمامي يمين
+  frPillar: ratingPaintingInput
+
+  # القائم الأمامي يسار
+  flPillar: ratingPaintingInput
+
+  # القائم الوسط يمين
+  mrPillar: ratingPaintingInput
+
+  # القائم الوسط يسار
+  mlPillar: ratingPaintingInput
+
+  # القائم الخلفي يمين
+  brPillar: ratingPaintingInput
+
+  # القائم الخلفي يسار
+  blPillar: ratingPaintingInput
+
+  # حوض الماتور
+  motorSpace: ratingPaintingInput
+
+  # حوض الشنطة
+  trunkSpace: ratingPaintingInput
+}
+
+type file {
+  name: String!
+  type: String!
+  size: Int!
+  path: String!
+}
+
+input fileInput {
+  name: String!
+  type: String!
+  size: Int!
+  path: String!
+}
+
+enum gearboxTypes {
+  manual
+  automatic
+}
+
+enum gearboxTypesInput {
+  manual
+  automatic
+}
+
+# نقاط فحص الحالة السفلية للسيارة
+type inferior {
+  # حالة الشاسية والجسم السفلي من الأمام
+  front: ratingComment
+
+  # حالة الشاسية والجسم السفلي من الوسط
+  middle: ratingComment
+
+  # حالة الشاسية والجسم السفلي من الخلف
+  back: ratingComment
+
+  # الحالة العامة للشكمان
+  shakman: ratingComment
+}
+
+# نقاط فحص الحالة السفلية للسيارة
+input inferiorInput {
+  # حالة الشاسية والجسم السفلي من الأمام
+  front: ratingCommentInput
+
+  # حالة الشاسية والجسم السفلي من الوسط
+  middle: ratingCommentInput
+
+  # حالة الشاسية والجسم السفلي من الخلف
+  back: ratingCommentInput
+
+  # الحالة العامة للشكمان
+  shakman: ratingCommentInput
+}
+
+# نقاط الفحص الداخلية
+type interior {
+  # الزجاج الأمامي
+  windShield: ratingComment
+
+  # مرآة القيادة الرئيسية
+  windShieldMirror: ratingComment
+
+  # الفرش الداخلي للباب الأمامي يمين
+  frDoorPadding: ratingComment
+
+  # الفرش الداخلي للباب الأمامي يسار
+  flDoorPadding: ratingComment
+
+  # الفرش الداخلي للباب الخلفي يمين
+  brDoorPadding: ratingComment
+
+  # الفرش الداخلي للباب الخلفي يسار
+  blDoorPadding: ratingComment
+
+  # الطابوه الجزء اليمين بالدرج
+  rTab: ratingComment
+
+  # الطابلوه المنتصف بالكنسول
+  mTab: ratingComment
+
+  # الطابلوه اليسار بالعدادت
+  lTab: ratingComment
+
+  # الكرسي الأمامي اليمين
+  rSeat: ratingComment
+
+  # الكرسي الأمامي يسار
+  lSeat: ratingComment
+
+  # الكنبة الخلفية مقعد
+  couch: ratingComment
+
+  # الكنبة الخلفية مسند
+  couchPillow: ratingComment
+
+  # الكنسول الخلفي
+  bConsole: ratingComment
+
+  # الفرش أرضيات
+  floor: ratingComment
+
+  # الدواسات
+  mats: ratingComment
+
+  # الشمسية الأمامي يمين
+  rSunBlocker: ratingComment
+
+  # الشمسية الأمامي يسار
+  lSunBlocker: ratingComment
+
+  # حزام الأمان يمين
+  frSeatBelt: ratingComment
+
+  # حزام الأمان يسار
+  flSeatBelt: ratingComment
+
+  # شماعة الباب الأمامي يمين
+  frHanger: ratingComment
+
+  # شماعة الباب الأمامي يسار
+  flHanger: ratingComment
+
+  # شماعة الباب خلفي يمين
+  brHanger: ratingComment
+
+  # شماعة الباب خلفي يسار
+  blHanger: ratingComment
+
+  # فرش السقف
+  ceilingPadding: ratingComment
+
+  # المسجل
+  recorder: ratingComment
+
+  # السماعة الأمامي يمين
+  frSpeaker: ratingComment
+
+  # السماعة الأمامي يسار
+  flSpeaker: ratingComment
+
+  # السماعة الخلفي يمين
+  brSpeaker: ratingComment
+
+  # السماعة الخلفي يسار
+  blSpeaker: ratingComment
+
+  # التكييف
+  ac: ratingComment
+
+  # الإضاة الداخلية أمامي
+  fLight: ratingComment
+
+  # لإضاة الداخلية مقصورة
+  bLight: ratingComment
+}
+
+# نقاط الفحص الداخلية
+input interiorInput {
+  # الزجاج الأمامي
+  windShield: ratingCommentInput
+
+  # مرآة القيادة الرئيسية
+  windShieldMirror: ratingCommentInput
+
+  # الفرش الداخلي للباب الأمامي يمين
+  frDoorPadding: ratingCommentInput
+
+  # الفرش الداخلي للباب الأمامي يسار
+  flDoorPadding: ratingCommentInput
+
+  # الفرش الداخلي للباب الخلفي يمين
+  brDoorPadding: ratingCommentInput
+
+  # الفرش الداخلي للباب الخلفي يسار
+  blDoorPadding: ratingCommentInput
+
+  # الطابوه الجزء اليمين بالدرج
+  rTab: ratingCommentInput
+
+  # الطابلوه المنتصف بالكنسول
+  mTab: ratingCommentInput
+
+  # الطابلوه اليسار بالعدادت
+  lTab: ratingCommentInput
+
+  # الكرسي الأمامي اليمين
+  rSeat: ratingCommentInput
+
+  # الكرسي الأمامي يسار
+  lSeat: ratingCommentInput
+
+  # الكنبة الخلفية مقعد
+  couch: ratingCommentInput
+
+  # الكنبة الخلفية مسند
+  couchPillow: ratingCommentInput
+
+  # الكنسول الخلفي
+  bConsole: ratingCommentInput
+
+  # الفرش أرضيات
+  floor: ratingCommentInput
+
+  # الدواسات
+  mats: ratingCommentInput
+
+  # الشمسية الأمامي يمين
+  rSunBlocker: ratingCommentInput
+
+  # الشمسية الأمامي يسار
+  lSunBlocker: ratingCommentInput
+
+  # حزام الأمان يمين
+  frSeatBelt: ratingCommentInput
+
+  # حزام الأمان يسار
+  flSeatBelt: ratingCommentInput
+
+  # شماعة الباب الأمامي يمين
+  frHanger: ratingCommentInput
+
+  # شماعة الباب الأمامي يسار
+  flHanger: ratingCommentInput
+
+  # شماعة الباب خلفي يمين
+  brHanger: ratingCommentInput
+
+  # شماعة الباب خلفي يسار
+  blHanger: ratingCommentInput
+
+  # فرش السقف
+  ceilingPadding: ratingCommentInput
+
+  # المسجل
+  recorder: ratingCommentInput
+
+  # السماعة الأمامي يمين
+  frSpeaker: ratingCommentInput
+
+  # السماعة الأمامي يسار
+  flSpeaker: ratingCommentInput
+
+  # السماعة الخلفي يمين
+  brSpeaker: ratingCommentInput
+
+  # السماعة الخلفي يسار
+  blSpeaker: ratingCommentInput
+
+  # التكييف
+  ac: ratingCommentInput
+
+  # الإضاة الداخلية أمامي
+  fLight: ratingCommentInput
+
+  # لإضاة الداخلية مقصورة
+  bLight: ratingCommentInput
+}
+
+# The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+scalar JSON
+
+type login {
+  token: String
+  message: String
+}
+
+type logout {
+  result: Boolean
+}
+
+# نقاط فحص الماتور
+type motor {
+  # صوت الماتور
+  sound: ratingComment
+
+  # قياس العادم بالعين
+  exhaust: exhaust
+
+  # ترشيح زيت من أعلى الماتور
+  motorTopLeak: booleanComment
+
+  # ترشيح زيت من أسفل الماتور
+  motorBottomLeak: booleanComment
+
+  # ترشيح زيت من الفتيس
+  gearboxLeak: booleanComment
+
+  # حالة الفتيس
+  gearbox: ratingComment
+
+  # الكوبلن يمين (الأكس)
+  rtKoblin: ratingComment
+
+  # الكوبلن يسار (الأكس)
+  ltKoblin: ratingComment
+
+  # الكرونة
+  karona: ratingComment
+
+  # الباور
+  power: ratingComment
+
+  # حالة الشكمان
+  shakman: ratingComment
+}
+
+# نقاط فحص الماتور
+input motorInput {
+  # صوت الماتور
+  sound: ratingCommentInput
+
+  # قياس العادم بالعين
+  exhaust: exhastInput
+
+  # ترشيح زيت من أعلى الماتور
+  motorTopLeak: booleanCommentInput
+
+  # ترشيح زيت من أسفل الماتور
+  motorBottomLeak: booleanCommentInput
+
+  # ترشيح زيت من الفتيس
+  gearboxLeak: booleanCommentInput
+
+  # حالة الفتيس
+  gearbox: ratingCommentInput
+
+  # الكبالن
+  kabalin: ratingCommentInput
+
+  # الكرونة
+  karona: ratingCommentInput
+
+  # الباور
+  power: ratingCommentInput
+
+  # حالة الشكمان
+  shakman: ratingCommentInput
+}
+
+type Mutation {
+  role: roleMutation
+  checkedCar: checkedCarMutation
+  usedCar: usedCarMutation
+  newCar: newCarMutation
+  user: userMutation
+  config: configMutation
+}
+
+type newCar {
+  _id: ID
+  userId: ID
+
+  # نوع اعلان السيارة
+  carType: String!
+
+  # عنوان الاعلان
+  title: String!
+
+  # الماركة-النوع
+  brand: String
+
+  # الموديل
+  model: String
+
+  # طراز 
+  type: String
+
+  # نمط السيارة
+  pattern: String
+
+  # سنة الصنع
+  year: String
+
+  # قوة حصان
+  hp: String
+
+  # سعة المحرك
+  cc: String
+
+  # الوقود
+  fuel: String
+
+  # ناقل الحركة
+  gearbox: gearboxTypes
+
+  # لون السيارة
+  color: String
+  gallery: [file!]
+  created: String
+  updated: String
+  expiration: String
+  published: String
+  validFor: [String]
+  price: carPrice
+}
+
+input newCarInput {
+  _id: ID
+  userId: ID
+
+  # عنوان الاعلان
+  title: String!
+
+  # الماركة-النوع
+  brand: String
+
+  # الموديل
+  model: String
+
+  # طراز 
+  type: String
+
+  # نمط السيارة
+  pattern: String
+
+  # سنة الصنع
+  year: String
+
+  # قوة حصان
+  hp: String
+
+  # سعة المحرك
+  cc: String
+
+  # الوقود
+  fuel: String
+
+  # ناقل الحركة
+  gearbox: gearboxTypesInput
+
+  # لون السيارة
+  color: String
+  gallery: [fileInput!]
+  created: String
+  updated: String
+  expiration: String
+  published: String
+  validFor: [String]
+  price: carePriceInput
+}
+
+type newCarMutation {
+  remove(id: ID!): newCar
+  removeAll: Boolean
+  upsert(data: newCarInput!): newCar
+}
+
+type newCarQuery {
+  find(filter: JSON): [newCar]
+  findOne(id: ID!): newCar
+}
+
+interface Node {
+  id: ID!
+}
+
+enum permissionsEnum {
+  create
+  upsert
+  upsertOwn
+  remove
+  removeOwn
+  find
+  findOwn
+  findOne
+  findOneOwn
+  login
+  logout
+  register
+  changePassword
+  changeOwnPassword
+  findRoles
+  findOwnRoles
+  syncRoles
+  none
+}
+
+type Query {
+  node(id: ID!): Node
+  user: userQuery
+  role: roleQuery
+  checkedCar: checkedCarQuery
+  usedCar: usedCarQuery
+  newCar: newCarQuery
+  config: configQuery
+}
+
+# Complex data type of rating (out of ten) and a text comment
+type ratingComment {
+  notChecked: Boolean
+
+  # تقييم السيارة من عشرة
+  rating: Int
+
+  # التعليق على التقييم
+  comment: String
+}
+
+# Complex data type of rating (out of ten) and a text comment
+input ratingCommentInput {
+  notChecked: Boolean
+
+  # تقييم السيارة من عشرة
+  rating: Int
+
+  # التعليق على التقييم
+  comment: String
+}
+
+# Complex data type of rating (out of ten) and a text comment
+type ratingPainting {
+  notChecked: Boolean
+
+  # تقييم السيارة من عشرة
+  rating: Int
+
+  # حالة الدهان
+  painting: String
+}
+
+# Complex data type of rating (out of ten) and a text comment
+input ratingPaintingInput {
+  notChecked: Boolean
+
+  # تقييم السيارة من عشرة
+  rating: Int
+
+  # حالة الدهان
+  painting: String
+}
+
+enum resourcesEnum {
+  newCar
+  usedCar
+  checkedCar
+  role
+  user
+  config
+}
+
+input resourcesInput {
+  resources: [resourcesEnum]
+  permissions: [permissionsEnum]
+}
+
+type role {
+  roles: String
+  allows: [allows]
+}
+
+input roleInput {
+  roles: String
+  allows: [resourcesInput]
+}
+
+type roleMutation {
+  upsert(data: roleInput!): role
+  remove(role: ID!): ID
+}
+
+type roleQuery {
+  find: [String]
+  findOne(role: ID!): role
+}
+
+enum saftey {
+  alarm
+  abs
+  ebd
+  dirverAirBag
+  passangersAirBag
+  sideAirBag
+  frontSensors
+  backSensors
+  backCamera
+}
+
+type spareTire {
+  notChecked: Boolean
+  change: Boolean
+  size: Int
+  depth: Int
+}
+
+input spareTireInput {
+  notChecked: Boolean
+  change: Boolean
+  size: Int
+  depth: Int
+}
+
+# نقاط فحص نظام التعليق
+type suspension {
+  # المساعد الأمامي يمين
+  frShockAbsorber: String
+
+  # المساعد الأمامي يسار
+  flShockAbsorber: String
+
+  # المساعد الخلفي يمين
+  brShockAbsorber: String
+
+  # المساعد الخلفي يسار
+  blShockAbsorber: String
+
+  # المقص الأمامي يمين
+  frScissor: String
+
+  # المقص الأمامي يسار
+  flScissor: String
+
+  # المقص الخلفي يمين
+  brScissor: String
+
+  # المقص الخلفي يسار
+  blScissor: String
+
+  # علبة التروس
+  cogBox: String
+
+  # بارة الاسكترا يمين
+  rtScatra: String
+
+  # بارة الاسكترا يسار
+  ltScatra: String
+
+  # صابع الميزان أمامي يمين
+  rScale: String
+
+  # صابع الميزان أمامي يسار
+  lScale: String
+
+  # عمود الإتزان (الإستبليزر)
+  stabilizer: String
+
+  # البطاحة أمامي يمين (أعلى المساعد)
+  rSAHead: String
+
+  # البطاحة أمامي يسار (أعلى المساعد)
+  lSAHead: String
+
+  # الحالة العامة لنظام التعليق أمامي
+  fGeneralCondition: ratingComment
+
+  # الحالة العامة لنظام التعليق خلفي
+  bGeneralCondition: ratingComment
+}
+
+# نقاط فحص نظام التعليق
+input suspensionInput {
+  # المساعد الأمامي يمين
+  frShockAbsorber: String
+
+  # المساعد الأمامي يسار
+  flShockAbsorber: String
+
+  # المساعد الخلفي يمين
+  brShockAbsorber: String
+
+  # المساعد الخلفي يسار
+  blShockAbsorber: String
+
+  # المقص الأمامي يمين
+  frScissor: String
+
+  # المقص الأمامي يسار
+  flScissor: String
+
+  # المقص الخلفي يمين
+  brScissor: String
+
+  # المقص الخلفي يسار
+  blScissor: String
+
+  # علبة التروس
+  cogBox: String
+
+  # بارة الاسكترا يمين
+  rtScatra: String
+
+  # بارة الاسكترا يسار
+  ltScatra: String
+
+  # صابع الميزان أمامي يمين
+  rScale: String
+
+  # صابع الميزان أمامي يسار
+  lScale: String
+
+  # عمود الإتزان (الإستبليزر)
+  stabilizer: String
+
+  # البطاحة أمامي يمين (أعلى المساعد)
+  rSAHead: String
+
+  # البطاحة أمامي يسار (أعلى المساعد)
+  lSAHead: String
+
+  # الحالة العامة لنظام التعليق أمامي
+  fGeneralCondition: ratingCommentInput
+
+  # الحالة العامة لنظام التعليق خلفي
+  bGeneralCondition: ratingCommentInput
+}
+
+type syncRoles {
+  id: String
+  roles: [String]
+}
+
+type tire {
+  notChecked: Boolean
+  change: Boolean
+  size: Int
+  depth: Int
+  screws: Int
+  screwsDefault: Int
+}
+
+input tireInput {
+  notChecked: Boolean
+  change: Boolean
+  size: Int
+  depth: Int
+  screws: Int
+  screwsDefault: Int
+}
+
+# فحص الإطارات والمكابح
+type tiresBrakes {
+  # الإطار الأمامي يمين
+  frTire: tire
+
+  # الإطار الأمامي يسار
+  flTire: tire
+
+  # الإطار الخلفي يمين
+  brTire: tire
+
+  # الإطار الخلفي يسار
+  blTire: tire
+
+  # الإطار الإحتياطي
+  spareTire: spareTire
+
+  # تيل الفرامل أمامي يمين
+  frBreakPad: breakPad
+
+  # تيل الفرامل الأمامي يسار
+  flBreakPad: breakPad
+
+  # تيل الفرامل الخلفي يمين
+  brBreakPad: breakPad
+
+  # تيل الفرامل الخلفي يسار
+  blBreakPad: breakPad
+
+  # الماستر والسيرفو (توزيع زيت الباكم). ترشيح زيت
+  oilLeak: Boolean
+}
+
+# فحص الإطارات والمكابح
+input tiresBrakesInput {
+  # الإطار الأمامي يمين
+  frTire: tireInput
+
+  # الإطار الأمامي يسار
+  flTire: tireInput
+
+  # الإطار الخلفي يمين
+  brTire: tireInput
+
+  # الإطار الخلفي يسار
+  blTire: tireInput
+
+  # الإطار الإحتياطي
+  spareTire: spareTireInput
+
+  # تيل الفرامل أمامي يمين
+  frBreakPad: breakPadInput
+
+  # تيل الفرامل الأمامي يسار
+  flBreakPad: breakPadInput
+
+  # تيل الفرامل الخلفي يمين
+  brBreakPad: breakPadInput
+
+  # تيل الفرامل الخلفي يسار
+  blBreakPad: breakPadInput
+
+  # الماستر والسيرفو (توزيع زيت الباكم). ترشيح زيت
+  oilLeak: Boolean
+}
+
+type usedCar {
+  _id: ID
+  userId: ID
+
+  # نوع اعلان السيارة
+  carType: String!
+
+  # عنوان الاعلان
+  title: String!
+
+  # الماركة-النوع
+  brand: String
+
+  # الموديل
+  model: String
+
+  # طراز 
+  type: String
+
+  # نمط السيارة
+  pattern: String
+
+  # سنة الصنع
+  year: String
+
+  # قوة حصان
+  hp: String
+
+  # سعة المحرك
+  cc: String
+
+  # الوقود
+  fuel: String
+
+  # ناقل الحركة
+  gearbox: gearboxTypes
+
+  # لون السيارة
+  color: String
+  gallery: [file!]
+  created: String
+  updated: String
+  expiration: String
+  published: String
+  price: Int
+  description: String
+  inspectionPlace: String
+  licensePlace: String
+  phone: [String]
+  audio: [audioGPS]
+  body: [body]
+  control: [control]
+  saftey: [saftey]
+  windows: [windows]
+}
+
+input usedCarInput {
+  _id: ID
+  userId: ID
+
+  # عنوان الاعلان
+  title: String!
+
+  # الماركة-النوع
+  brand: String
+
+  # الموديل
+  model: String
+
+  # طراز 
+  type: String
+
+  # نمط السيارة
+  pattern: String
+
+  # سنة الصنع
+  year: String
+
+  # قوة حصان
+  hp: String
+
+  # سعة المحرك
+  cc: String
+
+  # الوقود
+  fuel: String
+
+  # ناقل الحركة
+  gearbox: gearboxTypesInput
+
+  # لون السيارة
+  color: String
+  gallery: [fileInput!]
+  created: String
+  updated: String
+  expiration: String
+  published: String
+  price: Int
+  description: String
+  inspectionPlace: String
+  licensePlace: String
+  phone: [String]
+  audio: [audioGPS]
+  body: [body]
+  control: [control]
+  saftey: [saftey]
+  windows: [windows]
+}
+
+type usedCarMutation {
+  remove(id: ID!): usedCar
+  removeAll: Boolean
+  upsert(data: usedCarInput!): usedCar
+}
+
+type usedCarQuery {
+  find(filter: JSON): [usedCar]
+  findOne(id: ID!): usedCar
+}
+
+type user {
+  _id: String
+  email: String
+  username: String
+}
+
+input userInput {
+  _id: String
+  email: String
+  username: String
+  password: String
+}
+
+type userMutation {
+  login(username: String, password: String): login
+  logout: logout
+  register(data: userInput!): user
+  upsert(data: userInput!): user
+  syncRoles(id: String!, roles: [String]!): syncRoles
+  changePassword(id: String!, password: String!): Boolean
+}
+
+type userQuery {
+  find: [user]
+  findOne(id: ID!): user
+  findRoles(id: ID!): [ID]
+}
+
+enum windows {
+  eFront
+  eBack
+  licensedShading
+}

@@ -1,0 +1,8 @@
+.foreverignore
+npm-debug.log
+yarn.lock
+node_modules
+home
+uploads
+db.json
+dist/server.js.map

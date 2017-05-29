@@ -1,0 +1,5 @@
+[{"_id":{"$oid":"58d0d2c6dcea95bda938aa72"},"key":"manager","newCar":true,"usedCar":true},
+{"_id":{"$oid":"58ef3cf7aeff6d64d906d873"},"key":"guest","newCar":true,"usedCar":true,"checkedCar":true,"role":true,"user":true},
+{"_id":{"$oid":"58ef7a9793082306ffc15209"},"key":"admin","newCar":true,"usedCar":true,"checkedCar":true,"role":true,"user":true,"config":true},
+{"_id":{"$oid":"58ef7b5893082306ffc15210"},"key":"authenticated","newCar":true,"usedCar":true,"checkedCar":true,"role":true,"user":true,"config":true}
+]

@@ -1,0 +1,18 @@
+query findOne($id: ID!) {
+  note {
+    findOne(id: $id) {
+      id
+      title
+      content
+      files {
+        name
+        type
+        size
+        path
+      }
+      meta{
+        created
+      }
+    }
+  }
+}

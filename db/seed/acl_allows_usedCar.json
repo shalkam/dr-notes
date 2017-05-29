@@ -1,0 +1,5 @@
+[{"_id":{"$oid":"58d0d2c6dcea95bda938aa73"},"key":"manager","upsert":true,"delete":true,"list":true},
+{"_id":{"$oid":"58ef3cf7aeff6d64d906d874"},"key":"guest","none":true},
+{"_id":{"$oid":"58ef7a9793082306ffc1520a"},"key":"admin","upsert":true,"find":true,"findOne":true,"remove":true},
+{"_id":{"$oid":"58ef7b5893082306ffc15211"},"key":"authenticated","none":true}
+]

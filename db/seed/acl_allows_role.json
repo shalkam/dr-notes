@@ -1,0 +1,4 @@
+[{"_id":{"$oid":"58ef3cf7aeff6d64d906d876"},"key":"guest","none":true},
+{"_id":{"$oid":"58ef7a9793082306ffc1520c"},"key":"admin","upsert":true,"find":true,"findOne":true,"remove":true},
+{"_id":{"$oid":"58ef7b5893082306ffc15213"},"key":"authenticated","none":true}
+]

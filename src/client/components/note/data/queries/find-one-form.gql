@@ -1,0 +1,9 @@
+query findOneForm($id: ID!){
+  config {
+    findOne(id: $id) {
+      _id
+      key
+      value
+    }
+  }
+}
