@@ -8,7 +8,7 @@ export default class index extends React.Component {
     return (
       <div>
         <Helmet>
-          <title>My Notes</title>
+          <title>Dr. Notes</title>
         </Helmet>
         <Switch>
           <Route exact={true} path="/note/create" component={routes.form} />

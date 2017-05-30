@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var path = require('path');
 const shell = require('child_process').execSync;
+var runSequence = require('run-sequence');
 var asar = require('asar');
 var fs = require('fs');
 var nodemon = require('nodemon');
@@ -161,15 +162,27 @@ gulp.task('build-dist-package', function() {
   const dist = path.join(__dirname, 'dist');
   shell(`mkdir -p ${dist}`);
   shell(`cp -r ${src}/* ${dist}`);
+  console.log('Copied extra package files');
 });
-gulp.task('asar', function() {
+gulp.task('clean', function() {
+  const dist = path.join(__dirname, 'dist');
+  shell(`rm -rf ${dist}`);
+  console.log('Cleaning dist directory');
+});
+gulp.task('asar', function(done) {
   const src = path.join(__dirname, 'dist');
   const dest = path.join(__dirname, 'dist/app.asar');
   asar.createPackage(src, dest, function() {
-    console.log('done.');
+    console.log('Built asar: ' + dest);
+    done();
   });
 });
-gulp.task('build', ['build-client', 'build-electron', 'build-dist-package']);
+gulp.task('build', function(done) {
+  runSequence('clean', 'build-client', 'build-electron', 'build-dist-package', 'asar', function() {
+    console.log('Done building electron asar package');
+    done();
+  });
+});
 gulp.task('dev', ['dev-client', 'dev-server']);
 gulp.task('run', function() {
   require(path.join(__dirname, 'dist/server.js'));

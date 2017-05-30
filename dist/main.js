@@ -23814,6 +23814,10 @@ var _server = __webpack_require__(206);
 
 var _server2 = _interopRequireDefault(_server);
 
+var _path = __webpack_require__(5);
+
+var _path2 = _interopRequireDefault(_path);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var menu = void 0;
@@ -23829,9 +23833,14 @@ _electron.app.on('before-quit', function () {
 });
 _electron.app.on('ready', function () {
   _server2.default.init();
-  mainWindow = new _electron.BrowserWindow({ show: false, width: 1024, height: 728 });
+  mainWindow = new _electron.BrowserWindow({
+    show: false,
+    width: 1024,
+    height: 728,
+    icon: _path2.default.join(__dirname, 'assets/dr-notes.png')
+  });
   _server2.default.on('server.loaded', function (port) {
-    mainWindow.loadURL('http://localhost:' + port, { extraHeaders: 'pragma: no-cache\n' });
+    mainWindow.loadURL('http://127.0.0.1:' + port, { extraHeaders: 'pragma: no-cache\n' });
     mainWindow.webContents.send('loaded.server', port);
   });
   mainWindow.webContents.on('did-finish-load', function () {
@@ -90614,3 +90623,4 @@ module.exports = __webpack_require__(182);
 
 /***/ })
 /******/ ]);
+//# sourceMappingURL=main.js.map
