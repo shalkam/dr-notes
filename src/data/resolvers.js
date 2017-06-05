@@ -1,4 +1,5 @@
 import note from './app/note/resolvers.js';
+import template from './app/template/resolvers.js';
 
 import {
   // GraphQLEmail,
@@ -11,10 +12,13 @@ import {
 
 export default {
   ...note,
+  ...template,
   Query: {
-    note: () => true
+    note: () => true,
+    template: () => true
   },
   Mutation: {
-    note: () => true
+    note: () => true,
+    template: () => true
   }
 };

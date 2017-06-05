@@ -1,0 +1,12 @@
+query findOne($id: ID!) {
+  template {
+    findOne(id: $id) {
+      id
+      title
+      content
+      meta{
+        created
+      }
+    }
+  }
+}

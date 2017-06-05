@@ -49,17 +49,20 @@ class Header extends React.Component {
           open={this.state.showModal}
           onRequestClose={() => this.setState({ showModal: !this.state.showModal })}>
           <h3>Dr. Notes</h3>
+          <a href="https://shalkam.github.io/dr-notes/" target="_blank">
+            https://shalkam.github.io/dr-notes
+          </a>
           <p>Version 1.0.0</p>
           <p>By:</p>
           <List>
             <ListItem
               disabled={true}
-              leftAvatar={<Avatar src="assets/images/1.jpg" size={40} style={{ margin: 5 }} />}>
+              leftAvatar={<Avatar src="./assets/images/1.jpg" size={40} style={{ margin: 5 }} />}>
               Mostafa Sholkamy: Building the software
             </ListItem>
             <ListItem
               disabled={true}
-              leftAvatar={<Avatar src="assets/images/2.jpg" size={40} style={{ margin: 5 }} />}>
+              leftAvatar={<Avatar src="./assets/images/2.jpg" size={40} style={{ margin: 5 }} />}>
               Mohamed Ahmed: Coming up with the idea and testing
             </ListItem>
           </List>
@@ -104,6 +107,22 @@ class Header extends React.Component {
             }}
             leftIcon={<NoteAdd />}>
             New note
+          </MenuItem>
+          <MenuItem
+            onTouchTap={() => {
+              this.props.onDrawerChange();
+              this.props.history.push('/template');
+            }}
+            leftIcon={<ListIcon />}>
+            Templates
+          </MenuItem>
+          <MenuItem
+            onTouchTap={() => {
+              this.props.onDrawerChange();
+              this.props.history.push('/template/create');
+            }}
+            leftIcon={<NoteAdd />}>
+            New template
           </MenuItem>
         </Drawer>
       </div>

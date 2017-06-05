@@ -25,6 +25,10 @@ app.on('ready', () => {
     mainWindow.loadURL(`http://127.0.0.1:${port}`, { extraHeaders: 'pragma: no-cache\n' });
     mainWindow.webContents.send('loaded.server', port);
   });
+  mainWindow.webContents.on('new-window', function(e, url) {
+    e.preventDefault();
+    shell.openExternal(url);
+  });
   mainWindow.webContents.on('did-finish-load', () => {
     mainWindow.show();
     mainWindow.focus();

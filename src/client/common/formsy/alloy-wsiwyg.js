@@ -10,14 +10,17 @@ class Editor extends React.Component {
     loaded: false
   };
   componentWillReceiveProps(newProps) {
-    this.setState({ value: this.props.getValue() });
-    if (newProps.getValue() !== this.state.value && this.state.loaded === false) {
-      this._editor.get('nativeEditor').setData(newProps.getValue() || '');
-      this.setState({ value: newProps.getValue(), loaded: true });
-    }
+    this.setState((prevState, props) => {
+      if (
+        props.value === undefined || (prevState.value !== props.value && prevState.loaded === false)
+      ) {
+        this._editor.get('nativeEditor').setData(props.getValue());
+        return { value: props.value, loaded: true };
+      }
+    });
   }
-  componentWillMount() {
-    this.setState({ value: this.props.getValue() });
+  componentWillUnmount() {
+    this._editor.destroy();
   }
   componentDidMount() {
     this._editor = window.AlloyEditor.editable(this.refs.container, {
@@ -76,10 +79,6 @@ class Editor extends React.Component {
     });
   }
 
-  componentWillUnmount() {
-    this._editor.destroy();
-  }
-
   render() {
     // Set a specific className based on the validation
     // state of this component. showRequired() is true
@@ -104,7 +103,7 @@ class Editor extends React.Component {
             transition: 'all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
             boxSizing: 'border-box',
             fontFamily: 'Roboto, sans-serif',
-            '-webkit-tap-highlight-color': 'rgba(0, 0, 0, 0)',
+            webkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
             boxShadow: 'rgba(0, 0, 0, 0.16) 0px 3px 10px, rgba(0, 0, 0, 0.23) 0px 3px 10px',
             borderRadius: '2px',
             width: '100%',

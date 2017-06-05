@@ -7,6 +7,7 @@ export default () => {
       autoload: true,
       autoloadCallback() {
         dbConnect.addCollection('notes');
+        dbConnect.addCollection('templates');
         resolve(dbConnect);
       }
     });

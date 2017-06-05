@@ -1,0 +1,9 @@
+mutation insert($data: templateInput!){
+  template {
+    insert(data: $data) {
+      id
+      title
+      content
+    }
+  }
+}

@@ -11,7 +11,8 @@ import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle } from 'material-ui/Toolbar';
-import ReactHtmlParser from 'react-html-parser';
+// import ReactHtmlParser from 'react-html-parser';
+import Parser from 'html-react-parser';
 import query from '../data/queries/find-one.gql';
 
 class details extends Component {
@@ -20,7 +21,6 @@ class details extends Component {
     this.props.data.refetch();
   }
   modalToggle() {
-    console.log(this.state.showModal);
     this.setState({ showModal: !this.state.showModal });
   }
   formatDate(date) {
@@ -82,7 +82,7 @@ class details extends Component {
             </ToolbarGroup>
           </Toolbar>
           <CardText>
-            {ReactHtmlParser(note.findOne.content)}
+            {Parser(note.findOne.content)}
           </CardText>
           {note.findOne.files &&
             note.findOne.files.length > 0 &&

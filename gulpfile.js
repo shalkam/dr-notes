@@ -122,21 +122,7 @@ gulp.task('dev-client', function(done) {
     process.exit();
   });
 });
-// gulp.task('dev-client', function(done) {
-//   var firedDone = false;
-//   console.log('Waiting for server to compile...');
-//   serverCompiler.run(function(err, stats) {
-//     var output = stats.compilation.outputOptions;
-//     console.log('Server compiled...');
-//     console.log('Starting server...');
-//     // console.log(stats.compilation.outputOptions);
-//     require(path.join(output.path, output.filename));
-//   });
-//   process.on('SIGINT', function() {
-//     console.log('Caught interrupt signal');
-//     process.exit();
-//   });
-// });
+
 gulp.task('build-schema', ['dev-server'], function getSchema() {
   fetchSchema(config.APP_URL + ':' + config.APP_PORT + '/' + config.GQL_URL_DIR, { readable: true })
     .then(function(schema) {
@@ -183,6 +169,7 @@ gulp.task('build', function(done) {
     done();
   });
 });
+gulp.task('dev-electron', ['watch-electron', 'dev-client']);
 gulp.task('dev', ['dev-client', 'dev-server']);
 gulp.task('run', function() {
   require(path.join(__dirname, 'dist/server.js'));

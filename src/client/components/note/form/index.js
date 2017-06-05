@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { graphql } from 'react-apollo';
+import queryString from 'query-string';
 import Form from './form.js';
 import query from '../data/queries/find-one-form.gql';
 
@@ -9,16 +10,10 @@ class FormIndex extends Component {
       model: {}
     });
   }
-  componentWillReceiveProps(newProps) {
-    if (newProps.data && !newProps.data.loading) {
-      this.setState({ model: newProps.data.config.findOne });
-    }
-  }
   render() {
-    if (this.props.data && this.props.data.loading) {
-      return <div>جاري التحميل</div>;
-    }
-    return <Form id={this.props.match.params.id} />;
+    const searchObj = queryString.parse(this.props.history.location.search);
+    console.log();
+    return <Form id={this.props.match.params.id} templateId={searchObj.template} />;
   }
 }
 export default FormIndex;

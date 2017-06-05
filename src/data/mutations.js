@@ -1,2 +1,3 @@
 import note from './app/note/mutations/index.js';
-export default { ...note };
+import template from './app/template/mutations/index.js';
+export default { ...note, ...template };

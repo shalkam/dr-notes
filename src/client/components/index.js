@@ -15,10 +15,11 @@ export default class admin extends React.Component {
     return (
       <div>
         <Helmet titleTemplate="%s">
-          <title>الرئيسية</title>
+          <title>Dr. Notes</title>
         </Helmet>
         <Layout>
           <Switch>
+            <Route path="/template" component={routes.template} />
             <Route path="/" component={routes.note} />
           </Switch>
         </Layout>

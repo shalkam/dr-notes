@@ -4,26 +4,36 @@ import baseModel from '../../../common/base/model.js';
 class modelIndex extends baseModel {
   insert(root, params, { req, db }, ast) {
     params.data.id = shortid.generate();
-    if (params.data.files) {
-      params.data.files = this.handleFiles(params.data.id, params.data.files);
+    let res;
+    if (params.data.title === '')
+      res = new Error('Title not found');
+    else {
+      if (params.data.files) {
+        params.data.files = this.handleFiles(params.data.id, params.data.files);
+      }
+      res = db.getCollection('notes').insert(params.data);
     }
-    let res = db.getCollection('notes').insert(params.data);
     if (!res) {
       res = new Error('Error upserting');
     }
     return res;
   }
   async update(root, params, { req, db }, ast) {
-    if (params.data.files) {
-      params.data.files = this.handleFiles(params.data.id, params.data.files);
-    }
-    let res = await new Promise(function(resolve, reject) {
-      db.getCollection('notes').findAndUpdate({ id: params.data.id }, rec => {
-        rec = Object.assign(rec, params.data);
-        resolve(params.data);
-        return rec;
+    let res;
+    if (params.data.title === '')
+      res = new Error('Title not found');
+    else {
+      if (params.data.files) {
+        params.data.files = this.handleFiles(params.data.id, params.data.files);
+      }
+      res = await new Promise(function(resolve, reject) {
+        db.getCollection('notes').findAndUpdate({ id: params.data.id }, rec => {
+          rec = Object.assign(rec, params.data);
+          resolve(params.data);
+          return rec;
+        });
       });
-    });
+    }
 
     if (!res) {
       res = new Error('Error upserting');

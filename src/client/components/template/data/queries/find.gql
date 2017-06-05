@@ -1,0 +1,12 @@
+query find {
+  template {
+    find {
+      id
+      title
+      content
+      meta {
+        created
+      }
+    }
+  }
+}

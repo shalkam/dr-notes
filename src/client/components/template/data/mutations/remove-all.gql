@@ -1,0 +1,5 @@
+mutation remove($id: ID!) {
+  template {
+    remove(id:$id)
+  }
+}

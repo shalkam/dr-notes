@@ -1,0 +1,9 @@
+mutation update($data: templateInput!){
+  template {
+    update(data: $data) {
+      id
+      title
+      content
+    }
+  }
+}

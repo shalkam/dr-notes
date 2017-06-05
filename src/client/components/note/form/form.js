@@ -4,7 +4,6 @@ import PubSub from 'pubsub-js';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 import { withRouter } from 'react-router';
-import { Tab, Nav, NavItem, Button, Col, Row } from 'react-bootstrap';
 import { fromObj } from 'form-data-to-object';
 import FormsyText from 'formsy-material-ui/lib/FormsyText';
 import AlloyEditor from '../../../common/formsy/alloy-wsiwyg.js';
@@ -15,6 +14,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import insert from '../data/mutations/insert.gql';
 import update from '../data/mutations/update.gql';
 import query from '../data/queries/find-one.gql';
+import templateQuery from '../../template/data/queries/find-one.gql';
 
 class Form extends Component {
   timer;
@@ -23,18 +23,23 @@ class Form extends Component {
       submitted: false,
       model: {},
       files: [],
-      loading: this.props.id ? true : false
+      loading: this.props.id || this.props.templateId ? true : false
     });
     this.props.note && this.props.note.refetch();
   }
   componentWillReceiveProps(newProps) {
+    let model = {};
     if (newProps.note && !newProps.note.loading) {
-      let model = newProps.note.note.findOne;
+      model = newProps.note.note.findOne;
       this.setState({ model });
       model = fromObj(model);
-      this.refs.form.reset(model);
+      this.refs.form && this.refs.form.reset(model);
     } else if (newProps.location.pathname === '/note/create') {
-      this.setState({ model: {} });
+      if (this.props.templateId !== undefined)
+        model.content = newProps.template &&
+          !newProps.template.loading &&
+          newProps.template.template.findOne.content;
+      this.setState({ model });
     } else {
       this.refs.form.reset();
     }
@@ -77,7 +82,7 @@ class Form extends Component {
         }
       })
       .catch(error => {
-        if (data.title === undefined) {
+        if (data.title === '') {
           PubSub.publish('NOTIFY', {
             autoDismiss: 3,
             dismissible: true,
@@ -97,7 +102,15 @@ class Form extends Component {
     }
   }
   handleInValid() {
-    if (this.state.submitted) console.log('there is an error');
+    if (this.state.submitted)
+      PubSub.publish('NOTIFY', {
+        autoDismiss: 3,
+        dismissible: true,
+        level: 'error',
+        message: 'Please enter correct data for this note',
+        position: 'br',
+        title: 'There was an error'
+      });
   }
   autoSave() {
     clearTimeout(this.timer);
@@ -105,7 +118,7 @@ class Form extends Component {
       () => {
         this.submit(true);
       },
-      500
+      1000
     );
   }
   handleFiles(files) {
@@ -114,6 +127,12 @@ class Form extends Component {
     this.setState({ model }, this.autoSave.bind(this));
   }
   render() {
+    if (
+      (this.props.template && this.props.template.loading) ||
+      (this.props.note && this.props.note.loading)
+    ) {
+      return <div>Loading</div>;
+    }
     return (
       <div style={{ padding: 10 }}>
         <Formsy.Form
@@ -162,6 +181,19 @@ export default compose(
       let options = {};
       if (props.id !== undefined) {
         options.variables = { id: props.id };
+      } else {
+        options.skip = true;
+      }
+      options.fetchPolicy = 'network-only';
+      return options;
+    }
+  }),
+  graphql(templateQuery, {
+    name: 'template',
+    options: props => {
+      let options = {};
+      if (props.templateId !== undefined) {
+        options.variables = { id: props.templateId };
       } else {
         options.skip = true;
       }
