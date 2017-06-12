@@ -11,7 +11,7 @@ import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle } from 'material-ui/Toolbar';
-import ReactHtmlParser from 'react-html-parser';
+import Parser from 'html-react-parser';
 import query from '../data/queries/find-one.gql';
 
 class details extends Component {
@@ -29,7 +29,6 @@ class details extends Component {
   render() {
     if (!this.props.data.loading) {
       const { template } = this.props.data;
-
       return (
         <Card style={{ margin: 20 }}>
           <Dialog
@@ -82,24 +81,8 @@ class details extends Component {
             </ToolbarGroup>
           </Toolbar>
           <CardText>
-            {ReactHtmlParser(template.findOne.content)}
+            {Parser(template.findOne.content)}
           </CardText>
-          {template.findOne.files &&
-            template.findOne.files.length > 0 &&
-            <CardActions className="noPrint">
-              <h3>Attachments</h3>
-              {template.findOne.files &&
-                template.findOne.files.map((file, k) => (
-                  <RaisedButton
-                    key={k}
-                    primary={true}
-                    label={file.name}
-                    onTouchTap={() => {
-                      window.location = `${window.location.origin}/${file.path.substr(file.path.indexOf('uploads'))}`;
-                    }}
-                  />
-                ))}
-            </CardActions>}
         </Card>
       );
     }

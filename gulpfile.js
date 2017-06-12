@@ -55,23 +55,10 @@ function onBuild(done) {
   };
 }
 
-gulp.task('build-client', function(done) {
-  frontendCompiler.run(onBuild(done));
-});
-
-gulp.task('build-server', function(done) {
-  serverCompiler.run(onBuild(done));
-});
-
-gulp.task('build-electron', function(done) {
-  electronCompiler.run(onBuild(done));
-});
-
 gulp.task('watch-electron', function(done) {
   var firedDone = false;
   watchElectron();
   electronCompiler.watch(1000, function(err, stats) {
-    console.log(firedDone);
     // if it's first time compiling
     if (firedDone === false) {
       firedDone = true;
@@ -162,6 +149,17 @@ gulp.task('asar', function(done) {
     console.log('Built asar: ' + dest);
     done();
   });
+});
+gulp.task('build-client', function(done) {
+  frontendCompiler.run(onBuild(done));
+});
+
+gulp.task('build-server', function(done) {
+  serverCompiler.run(onBuild(done));
+});
+
+gulp.task('build-electron', function(done) {
+  electronCompiler.run(onBuild(done));
 });
 gulp.task('build', function(done) {
   runSequence('clean', 'build-client', 'build-electron', 'build-dist-package', 'asar', function() {

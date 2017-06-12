@@ -1,7 +1,5 @@
 import React from 'react';
 import Formsy, { HOC } from 'formsy-react';
-import ReactHtmlParser from 'react-html-parser';
-import Paper from 'material-ui/Paper';
 import './alloy-editor/highlight.js';
 import 'alloyeditor/dist/alloy-editor/assets/alloy-editor-ocean-min.css';
 class Editor extends React.Component {
@@ -103,7 +101,7 @@ class Editor extends React.Component {
             transition: 'all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
             boxSizing: 'border-box',
             fontFamily: 'Roboto, sans-serif',
-            webkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
+            WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
             boxShadow: 'rgba(0, 0, 0, 0.16) 0px 3px 10px, rgba(0, 0, 0, 0.23) 0px 3px 10px',
             borderRadius: '2px',
             width: '100%',

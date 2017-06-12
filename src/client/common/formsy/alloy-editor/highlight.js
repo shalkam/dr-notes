@@ -24,6 +24,7 @@ var ButtonHighlight = React.createClass({
     var background = window.getComputedStyle(parentNode, null).getPropertyValue('background-color');
     var vars = {};
     vars['backgroundColor'] = background === 'rgb(255, 255, 0)' ? 'none' : 'rgb(255, 255, 0)';
+    this.setState({ background: vars['backgroundColor'] });
     CKEDITOR.config.highlight_style = {
       element: 'span',
       styles: { 'background-color': '#(backgroundColor)' }
@@ -41,6 +42,7 @@ var ButtonHighlight = React.createClass({
     var cssClass = 'ae-button ' + this.getStateClasses();
     var parentNode = document.getSelection().extentNode.parentNode;
     var background = window.getComputedStyle(parentNode, null).getPropertyValue('background-color');
+    if (this.state && this.state.background) background = this.state.background;
     if (background === 'rgb(255, 255, 0)') cssClass += ' ae-button-pressed';
     return (
       <button

@@ -8,7 +8,7 @@ class modelIndex extends baseModel {
     if (params.data.title === '')
       res = new Error('Title not found');
     else {
-      res = db.getCollection('notes').insert(params.data);
+      res = db.getCollection('templates').insert(params.data);
     }
     if (!res) {
       res = new Error('Error upserting');
@@ -21,7 +21,7 @@ class modelIndex extends baseModel {
       res = new Error('Title not found');
     else {
       res = await new Promise(function(resolve, reject) {
-        db.getCollection('notes').findAndUpdate({ id: params.data.id }, rec => {
+        db.getCollection('templates').findAndUpdate({ id: params.data.id }, rec => {
           rec = Object.assign(rec, params.data);
           resolve(params.data);
           return rec;

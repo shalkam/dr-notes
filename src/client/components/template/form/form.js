@@ -72,7 +72,7 @@ class Form extends Component {
             position: 'br',
             title: 'Template  Saved'
           });
-          self.props.history.push('/template/' + data.template[operation].id);
+          self.props.history.push('/template');
         }
       })
       .catch(error => {

@@ -24898,8 +24898,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = {
   type: new _graphql.GraphQLList(_index2.default),
-  args: { filter: { name: 'filter', type: _graphqlTypeJson2.default } }
+  args: {
+    filter: { name: 'filter', type: _graphqlTypeJson2.default },
+    after: { name: 'after', type: _graphql.GraphQLString },
+    first: { name: 'after', type: _graphql.GraphQLInt }
+  }
 };
+// import NoteConnection from '../types/connection.js';
 
 /***/ }),
 /* 199 */
@@ -25092,7 +25097,7 @@ var modelIndex = function (_baseModel) {
       params.data.id = _shortid2.default.generate();
       var res = void 0;
       if (params.data.title === '') res = new Error('Title not found');else {
-        res = db.getCollection('notes').insert(params.data);
+        res = db.getCollection('templates').insert(params.data);
       }
       if (!res) {
         res = new Error('Error upserting');
@@ -25124,7 +25129,7 @@ var modelIndex = function (_baseModel) {
               case 5:
                 _context.next = 7;
                 return new _promise2.default(function (resolve, reject) {
-                  db.getCollection('notes').findAndUpdate({ id: params.data.id }, function (rec) {
+                  db.getCollection('templates').findAndUpdate({ id: params.data.id }, function (rec) {
                     rec = (0, _assign2.default)(rec, params.data);
                     resolve(params.data);
                     return rec;
