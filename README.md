@@ -13,14 +13,13 @@ It uses following libraries:
 * [Windows](https://github.com/shalkam/dr-notes/releases/download/1.0.1/dr-notes-win.tar.gz)
 
 # Screenshots
-<img src="https://www.dropbox.com/s/zy1n0n2yfckeltg/Screenshot%20from%202017-05-30%2013-11-24.png?dl=1"
->
-<img src="https://www.dropbox.com/s/utckr73wqv1ac5h/Screenshot%20from%202017-06-12%2011-08-37.png?dl=1"
->
-<img src="https://www.dropbox.com/s/gshyoxalqr1mzw8/Screenshot%20from%202017-05-30%2013-13-12.png?dl=1"
->
-<img src="https://www.dropbox.com/s/sas3nahfqjzetim/Screenshot%20from%202017-05-30%2013-13-21.png?dl=1"
->
+![img](https://www.dropbox.com/s/zy1n0n2yfckeltg/Screenshot%20from%202017-05-30%2013-11-24.png?dl=1)
+
+![img](https://www.dropbox.com/s/utckr73wqv1ac5h/Screenshot%20from%202017-06-12%2011-08-37.png?dl=1)
+
+![img](https://www.dropbox.com/s/gshyoxalqr1mzw8/Screenshot%20from%202017-05-30%2013-13-12.png?dl=1)
+
+![img](https://www.dropbox.com/s/sas3nahfqjzetim/Screenshot%20from%202017-05-30%2013-13-21.png?dl=1)
 
 # Development
 ## Clone the repository
